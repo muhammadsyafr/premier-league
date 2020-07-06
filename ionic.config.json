@@ -1,0 +1,7 @@
+{
+  "name": "manUnited",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
