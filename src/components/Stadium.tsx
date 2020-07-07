@@ -16,10 +16,10 @@ import {
   IonBadge
 } from "@ionic/react";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { sortString } from "../service/index";
 
-import { pin, arrowBack, person } from "ionicons/icons";
+import { arrowBack } from "ionicons/icons";
 
 type StadiumProps = {
   stadiumName: string;

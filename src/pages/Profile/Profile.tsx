@@ -15,9 +15,17 @@ const Profile: React.FC = () => {
   useEffect(() => {
     document.title = 'Team Profile'
     let getTeamName: any = localStorage.getItem("team_name");
-    fetchData("team", getTeamName).then((res: any) => {
-      setmyTeam(res.teams[0]);
-    });
+    if (!getTeamName) {
+      fetchData("team", 'Man United').then((res: any) => {
+        setmyTeam(res.teams[0]);
+        // console.log(res.teams[0])
+      });
+    } else {
+      fetchData("team", getTeamName).then((res: any) => {
+        setmyTeam(res.teams[0]);
+      });
+    }
+    
   }, []);
 
   return (

@@ -44,6 +44,13 @@ export const convertDate = (date: any) => {
   return moment(date).format("LL");
 };
 
+export const convertTime = (time: any) => {
+  if (!time) return null;
+  // moment.locale('en');
+  return time.substring(0, 5)
+  return moment(time).format("LT");
+};
+
 export const sortString = (text: any, length: number) => {
   if (!length) {
     length = 100;

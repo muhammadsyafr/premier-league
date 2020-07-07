@@ -1,9 +1,6 @@
 import {
   IonButtons,
   IonHeader,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
   IonToolbar,
   IonRow,
   IonCol,
@@ -11,14 +8,14 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
-  IonCardTitle,
   IonBadge,
   IonImg,
   IonButton,
   IonModal,
   IonIcon,
   IonContent,
-  IonText
+  IonText,
+  IonGrid
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { fetchData, getLogos, convertDate } from "../../service/index";
@@ -28,6 +25,9 @@ import { arrowBack } from "ionicons/icons";
 const CardMatch = (props: any) => {
   const [showModal, setShowModal] = useState(false);
   let getTeamName: any = localStorage.getItem("team_name");
+  if (!getTeamName) {
+    getTeamName = "Man United";
+  }
   const [logoAway, setLogoAway] = useState<any>();
   const [logoHome, setLogoHome] = useState<any>();
 
@@ -45,11 +45,9 @@ const CardMatch = (props: any) => {
     <IonCard>
       <IonCardHeader>
         <IonCardSubtitle>
-          {getTeamName == props.data.strHomeTeam ? (
-            <IonBadge color="tertiary">Home</IonBadge>
-          ) : (
-            <IonBadge color="danger">Away</IonBadge>
-          )}
+          <small className="ion-text-center" style={{ fontSize: "12px" }}>
+            {props.data.strLeague} {props.data.strSeason}
+          </small>
         </IonCardSubtitle>
       </IonCardHeader>
 
@@ -73,9 +71,13 @@ const CardMatch = (props: any) => {
         <IonRow className="ion-text-center">
           <IonCol>
             {props.data.intHomeScore >= props.data.intAwayScore ? (
-              <IonBadge color="success">{props.data.intHomeScore}</IonBadge>
+              <IonBadge className="score" color="success">
+                {props.data.intHomeScore}
+              </IonBadge>
             ) : (
-              <IonBadge color="danger">{props.data.intHomeScore}</IonBadge>
+              <IonBadge className="score" color="danger">
+                {props.data.intHomeScore}
+              </IonBadge>
             )}
           </IonCol>
           <IonCol>
@@ -83,12 +85,23 @@ const CardMatch = (props: any) => {
           </IonCol>
           <IonCol>
             {props.data.intAwayScore >= props.data.intHomeScore ? (
-              <IonBadge color="success">{props.data.intAwayScore}</IonBadge>
+              <IonBadge className="score" color="success">
+                {props.data.intAwayScore}
+              </IonBadge>
             ) : (
-              <IonBadge color="danger">{props.data.intAwayScore}</IonBadge>
+              <IonBadge className="score" color="danger">
+                {props.data.intAwayScore}
+              </IonBadge>
             )}
           </IonCol>
         </IonRow>
+        <IonCardSubtitle className="ion-text-center">
+          {getTeamName === props.data.strHomeTeam ? (
+            <IonBadge mode="ios" color="tertiary">Home</IonBadge>
+          ) : (
+            <IonBadge mode="ios" color="secondary">Away</IonBadge>
+          )}
+        </IonCardSubtitle>
       </IonCardContent>
       <IonButton
         size="small"
@@ -97,7 +110,7 @@ const CardMatch = (props: any) => {
         expand="block"
         onClick={() => setShowModal(true)}
       >
-        See More Details
+        Detail Match
       </IonButton>
 
       <IonModal isOpen={showModal} cssClass="ion-content">
@@ -111,15 +124,26 @@ const CardMatch = (props: any) => {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonText style={{ padding: "10px", lineHeight: "20px" }}>
-            {props.data.strEvent}
-          </IonText>
+          <div className="ion-text-center">
+            <IonText style={{ padding: "10px", lineHeight: "20px" }}>
+              <h2>{props.data.strEvent}</h2>
+            </IonText>
+          </div>
+          <IonGrid>
+            <IonRow>
+              <IonCol size="6">
+              {/* Home */}
+              {props.data.strHomeGoalDetails}
+              </IonCol>
+              <IonCol size="6">
+              {/* Away */}
+              {props.data.strAwayGoalDetails}
+              </IonCol>
+            </IonRow>
+            </IonGrid>
         </IonContent>
       </IonModal>
-
     </IonCard>
-
-    
   );
 };
 
@@ -129,10 +153,17 @@ const Lastmatch: React.FC = () => {
   useEffect(() => {
     document.title = "Last Match";
     let getTeamId: any = localStorage.getItem("team_id");
-    fetchData("last_match", getTeamId).then((res: any) => {
-      console.log(res.results);
-      setLastMatch(res.results);
-    });
+    if (!getTeamId) {
+      fetchData("last_match", 133612).then((res: any) => {
+        // console.log(res.results);
+        setLastMatch(res.results);
+      });
+    } else {
+      fetchData("last_match", getTeamId).then((res: any) => {
+        console.log(res.results);
+        setLastMatch(res.results);
+      });
+    }
   }, []);
 
   return (

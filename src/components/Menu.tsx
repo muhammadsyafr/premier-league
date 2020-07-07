@@ -12,10 +12,12 @@ import {
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
-  heartOutline,
-  heartSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
+  homeOutline,
+  footballOutline,
+  football,
+  calendarOutline,
+  podiumOutline,
+  bookOutline
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -30,32 +32,32 @@ const appPages: AppPage[] = [
   {
     title: "Main",
     url: "/page/Main",
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
+    iosIcon: homeOutline,
+    mdIcon: homeOutline,
   },
   {
     title: "Profile",
     url: "/page/Profile",
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
+    iosIcon: footballOutline,
+    mdIcon: football,
   },
   {
     title: "Next Match",
     url: "/page/Nextmatch",
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp,
+    iosIcon: calendarOutline,
+    mdIcon: calendarOutline,
   },
   {
     title: "Last Match",
     url: "/page/Lastmatch",
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp,
+    iosIcon: bookOutline,
+    mdIcon: bookOutline,
   },
   {
     title: "Standings",
     url: "/page/Standings",
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
+    iosIcon: podiumOutline,
+    mdIcon: podiumOutline,
   },
 ];
 
@@ -67,6 +69,10 @@ const Menu: React.FC = () => {
   useEffect(() => {
     let getTeamName: any = localStorage.getItem("team_name");
     let getTeamLogo: any = localStorage.getItem("team_logo");
+    if (!getTeamName) {
+      getTeamLogo = "https://www.thesportsdb.com/images/media/team/badge/xzqdr11517660252.png"
+      getTeamName = "Man United"
+    }
     setTeamName(getTeamName);
     setTeamLogo(getTeamLogo);
   }, []);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+// import { useHistory } from "react-router-dom";
 import {
   IonGrid,
   IonRow,
@@ -12,14 +12,16 @@ import {
 import { fetchData } from "../../service/index";
 
 const CardTeam = (props:any) => {
+  // let history = useHistory();
 // console.log(props);
-
   const setTeamToState = (team:any) => {
     console.log(team)
     window.localStorage.setItem("team_name", team.name);
     window.localStorage.setItem("team_id", team.teamId);
     window.localStorage.setItem("team_logo", team.logo);
-    window.location.reload();
+    // window.location.reload();
+    // history.push('/page/Profile')
+    window.location.replace('/')
   }
 
   return (
