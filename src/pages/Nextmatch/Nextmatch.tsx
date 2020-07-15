@@ -29,7 +29,7 @@ import {
   
     useEffect(() => {
       getLogos(props.data.strAwayTeam).then((res) => {
-        // console.log('Home', res.teams[0]);
+        // console.log('Home', res.teams[0]); 
         setLogoAway(res.teams[0].strTeamBadge);
       });
       getLogos(props.data.strHomeTeam).then((res) => {
@@ -117,6 +117,9 @@ import {
     useEffect(() => {
       document.title = "Next Match"
       let getTeamId: any = localStorage.getItem("team_id");
+      if (!getTeamId) {
+        getTeamId = 133612
+      }
       fetchData("next_match",getTeamId).then((res: any) => {
         // console.log(res.events)
         setNextMatch(res.events);

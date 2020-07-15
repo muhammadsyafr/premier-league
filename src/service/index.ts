@@ -4,9 +4,7 @@ import "moment/locale/id"; // without this line it didn't work
 moment.locale("id");
 
 let manchesterUnited = `https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=Manchester%20United`;
-// let nextFiveMatch = `https://www.thesportsdb.com/api/v1/json/1/eventsnext.php?id=133612`;
 let lookupTeamPremierLeague = `https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4328`;
-// let teams = `https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=watford`;
 let premierLeagueChart = `https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4328&s=2019-2020`;
 
 export const fetchData = async (loadContent: any, team: any) => {
@@ -48,7 +46,6 @@ export const convertTime = (time: any) => {
   if (!time) return null;
   // moment.locale('en');
   return time.substring(0, 5)
-  return moment(time).format("LT");
 };
 
 export const sortString = (text: any, length: number) => {

@@ -3,6 +3,7 @@
     border-collapse: collapse;
     width: 100%;
     padding: 20px;
+    font-size: 10px;
 
   }
   
@@ -22,3 +23,4 @@
     background-color: #3880ff;
     color: white;
   }
+

@@ -125,17 +125,22 @@ const CardMatch = (props: any) => {
         </IonHeader>
         <IonContent>
           <div className="ion-text-center">
-            <IonText style={{ padding: "10px", lineHeight: "20px" }}>
+            <IonText>
               <h2>{props.data.strEvent}</h2>
             </IonText>
           </div>
           <IonGrid>
+          <h5 style={{padding:'10px'}}>Goal Details</h5>
             <IonRow>
-              <IonCol size="6">
+              <IonCol size="6" style={{
+              padding: '10px', lineHeight: '30px', color: '#5e6472',fontSize: '14px'
+            }}>
               {/* Home */}
               {props.data.strHomeGoalDetails}
               </IonCol>
-              <IonCol size="6">
+              <IonCol size="6" style={{
+              padding: '10px', lineHeight: '30px', color: '#5e6472',fontSize: '14px'
+            }}>
               {/* Away */}
               {props.data.strAwayGoalDetails}
               </IonCol>

@@ -98,11 +98,10 @@ const TeamProfile: React.FC<TeamProps> = (props: any) => {
             </IonButtons>
           </IonToolbar>
         </IonHeader>
-        <IonContent>
-          <IonText style={{ padding: "10px", lineHeight: "20px" }}>
-            {props.desc}
-          </IonText>
-        </IonContent>
+        <span className="text-modal" style={{
+              padding: '10px', lineHeight: '30px', color: '#5e6472', fontSize: '14px'
+            }}>{props.desc}
+        </span>
       </IonModal>
     </div>
   );
