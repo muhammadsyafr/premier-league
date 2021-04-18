@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import { useHistory } from "react-router-dom";
 import {
+  IonContent,
   IonGrid,
   IonRow,
   IonCard,
@@ -8,12 +8,13 @@ import {
   IonCardSubtitle,
   IonImg,
   IonButton,
+  IonRefresher,
+  IonRefresherContent
 } from "@ionic/react";
+import { RefresherEventDetail } from '@ionic/core';
 import { fetchData } from "../../service/index";
 
 const CardTeam = (props:any) => {
-  // let history = useHistory();
-// console.log(props);
   const setTeamToState = (team:any) => {
     console.log(team)
     window.localStorage.setItem("team_name", team.name);
@@ -57,11 +58,27 @@ const Main: React.FC = () => {
   useEffect(() => {
     document.title = "Main";
     fetchData("all_team", '').then((res: any) => {
-      // console.log(res);
       setTeams(res.teams);
     });
   }, []);
+
+  function doRefresh(event: CustomEvent<RefresherEventDetail>) {
+    console.log('Begin async operation');
+    fetchData("all_team", '').then((res: any) => {
+      setTeams(res.teams);
+      console.log(res.teams)
+    });
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.detail.complete();  
+    }, 2000);
+  }
+
   return (
+    <div>
+      <IonRefresher slot="fixed" onIonRefresh={doRefresh} pullFactor={0.5} pullMin={100} pullMax={200}>
+        <IonRefresherContent></IonRefresherContent>
+      </IonRefresher>
     <IonGrid>
       <IonRow className="ion-justify-content-center">
         {
@@ -71,6 +88,7 @@ const Main: React.FC = () => {
         }
       </IonRow>
     </IonGrid>
+    </div>
   );
 };
 

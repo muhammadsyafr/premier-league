@@ -1,14 +1,31 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect,} from "react";
 // import { useParams } from "react-router";
+import {
+  IonRefresher,
+  IonRefresherContent
+} from "@ionic/react";
 import "./Standing.css";
 import { fetchData } from "../../service/index";
-import {
-  BrowserView,
-} from "react-device-detect";
+import { RefresherEventDetail } from '@ionic/core';
+import { BrowserView} from "react-device-detect";
 
 const Standing: React.FC = () => {
   // const { name } = useParams<{ name: string }>();
   const [standing, setStandings] = useState<any>();
+
+  function doRefresh(event: CustomEvent<RefresherEventDetail>) {
+    console.log('Begin async operation');
+    fetchData("standings",'').then((res: any) => {
+      res.table.sort(function(a:any, b:any){
+        return a.intRank - b.intRank
+      })
+      setStandings(res.table);
+    });
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.detail.complete();  
+    }, 2000);
+  }
 
   useEffect(() => {
     document.title = "Standings Premier League"
@@ -21,7 +38,7 @@ const Standing: React.FC = () => {
   }, []);
 
   const Teams = (props:any) => {
-    console.log(props.data)
+    // console.log(props.data)
     return(
       <tbody>
         <tr className={props.data.strTeam === localStorage.getItem("team_name") ? "myTeam" : ""}>
@@ -42,6 +59,10 @@ const Standing: React.FC = () => {
   }
 
   return (
+    <div>
+      <IonRefresher slot="fixed" onIonRefresh={doRefresh} pullFactor={0.5} pullMin={100} pullMax={200}>
+        <IonRefresherContent></IonRefresherContent>
+      </IonRefresher>
     <table id="customers">
       <thead>
       <tr>
@@ -65,6 +86,7 @@ const Standing: React.FC = () => {
         }
       
     </table>
+    </div>
   );
 };
 
