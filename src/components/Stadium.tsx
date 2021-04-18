@@ -12,7 +12,6 @@ import {
   IonHeader,
   IonToolbar,
   IonButtons,
-  IonText,
   IonBadge
 } from "@ionic/react";
 
@@ -42,7 +41,7 @@ const Stadium: React.FC<StadiumProps> = (props: any) => {
       </IonCardHeader>
 
       <IonCardContent>
-        <p>{sortString(props.desc, 201)}....</p>
+        <p>{sortString(props.desc, 200)}....</p>
       </IonCardContent>
 
       <IonButton
@@ -60,18 +59,17 @@ const Stadium: React.FC<StadiumProps> = (props: any) => {
           <IonToolbar>
             <IonButtons slot="start" onClick={() => setShowModal(false)}>
               <IonButton fill="clear">
-                <IonIcon icon={arrowBack} /> Back
+                <IonIcon icon={arrowBack} /> &nbsp; Back
               </IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
-        
-        
-            <span className="text-modal" style={{
-              padding: '10px', lineHeight: '30px', color: '#5e6472',fontSize: '14px'
-            }}>{props.desc}</span>
-          
-        
+        <IonContent scrollEvents={true} >
+          <p className="text-modal" style={{
+                paddingLeft: '20px', paddingRight:'20px', lineHeight: '30px', color: '#5e6472', fontSize: '14px'
+              }}>{props.desc}
+          </p>
+        </IonContent>
       </IonModal>
     </IonCard>
   );

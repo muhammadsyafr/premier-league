@@ -5,7 +5,7 @@ moment.locale("id");
 
 let manchesterUnited = `https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=Manchester%20United`;
 let lookupTeamPremierLeague = `https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4328`;
-let premierLeagueChart = `https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4328&s=2019-2020`;
+let premierLeagueChart = `https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4328&s=2020-2021`;
 
 export const fetchData = async (loadContent: any, team: any) => {
   let cases = "";

@@ -14,7 +14,7 @@ import {
     IonModal,IonIcon,
     IonContent,IonText
   } from "@ionic/react";
-  import { arrowBack, alarmOutline } from "ionicons/icons";
+  import { arrowBack } from "ionicons/icons";
   import React, {useEffect, useState} from "react";
   import { fetchData, convertDate, getLogos,convertTime } from "../../service/index";
 

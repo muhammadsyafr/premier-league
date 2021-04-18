@@ -15,7 +15,6 @@ import {
   homeOutline,
   footballOutline,
   football,
-  calendarOutline,
   podiumOutline,
   bookOutline
 } from "ionicons/icons";
@@ -40,12 +39,6 @@ const appPages: AppPage[] = [
     url: "/page/Profile",
     iosIcon: footballOutline,
     mdIcon: football,
-  },
-  {
-    title: "Next Match",
-    url: "/page/Nextmatch",
-    iosIcon: calendarOutline,
-    mdIcon: calendarOutline,
   },
   {
     title: "Last Match",

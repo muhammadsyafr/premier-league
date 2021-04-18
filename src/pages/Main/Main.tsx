@@ -21,7 +21,7 @@ const CardTeam = (props:any) => {
     window.localStorage.setItem("team_logo", team.logo);
     // window.location.reload();
     // history.push('/page/Profile')
-    window.location.replace('/')
+    window.location.replace('/page/Profile')
   }
 
   return (
@@ -41,7 +41,6 @@ const CardTeam = (props:any) => {
               mode="ios"
               fill="clear"
               expand="block"
-              // onClick={() => setShowModal(true)}
             >
               Choose Team
             </IonButton>
@@ -64,7 +63,7 @@ const Main: React.FC = () => {
   }, []);
   return (
     <IonGrid>
-      <IonRow>
+      <IonRow className="ion-justify-content-center">
         {
           teams ?
           teams.map((val:any, idx:number) => <CardTeam teamId={val.idTeam} name={val.strTeam} key={idx} logo={val.strTeamBadge}  /> )

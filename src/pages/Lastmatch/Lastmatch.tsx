@@ -23,6 +23,7 @@ import "./Lastmatch.css";
 import { arrowBack } from "ionicons/icons";
 
 const CardMatch = (props: any) => {
+  console.log(props)
   const [showModal, setShowModal] = useState(false);
   let getTeamName: any = localStorage.getItem("team_name");
   if (!getTeamName) {
@@ -33,7 +34,6 @@ const CardMatch = (props: any) => {
 
   useEffect(() => {
     getLogos(props.data.strAwayTeam).then((res) => {
-      // console.log('Home', res.teams[0]);
       setLogoAway(res.teams[0].strTeamBadge);
     });
     getLogos(props.data.strHomeTeam).then((res) => {
@@ -130,22 +130,8 @@ const CardMatch = (props: any) => {
             </IonText>
           </div>
           <IonGrid>
-          <h5 style={{padding:'10px'}}>Goal Details</h5>
-            <IonRow>
-              <IonCol size="6" style={{
-              padding: '10px', lineHeight: '30px', color: '#5e6472',fontSize: '14px'
-            }}>
-              {/* Home */}
-              {props.data.strHomeGoalDetails}
-              </IonCol>
-              <IonCol size="6" style={{
-              padding: '10px', lineHeight: '30px', color: '#5e6472',fontSize: '14px'
-            }}>
-              {/* Away */}
-              {props.data.strAwayGoalDetails}
-              </IonCol>
-            </IonRow>
-            </IonGrid>
+          <iframe className="responsive-iframe" title={props.data.strTeam} width="560" height="315" src={`https://www.youtube.com/embed/` + props.data.strVideo.slice(32, 50)} allow="autoplay; encrypted-media"></iframe>
+          </IonGrid>
         </IonContent>
       </IonModal>
     </IonCard>
@@ -165,7 +151,7 @@ const Lastmatch: React.FC = () => {
       });
     } else {
       fetchData("last_match", getTeamId).then((res: any) => {
-        console.log(res.results);
+        // console.log(res.results);
         setLastMatch(res.results);
       });
     }

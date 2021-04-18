@@ -16,6 +16,10 @@ import {
   IonSlide,
 } from "@ionic/react";
 
+import {
+  BrowserView,
+} from "react-device-detect";
+
 import { arrowBack } from "ionicons/icons";
 
 import React, { useState } from "react";
@@ -44,10 +48,13 @@ const TeamProfile: React.FC<TeamProps> = (props: any) => {
       <IonSlides options={slideOpts}>
         <IonSlide>
           <IonGrid className="ion-text-left">
-            <IonRow>
-              <IonCol size="4">
-                <IonImg src={props.img} style={{ padding: "15px" }} />
+            <IonRow className="ion-align-items-center">
+             
+              <BrowserView>
+              <IonCol size="3">
+                <IonImg src={props.img} style={{ width: 160, padding: "20px" }} />
               </IonCol>
+              </BrowserView>
               <IonCol>
                 <IonCardContent>
                   <IonText>
@@ -58,8 +65,8 @@ const TeamProfile: React.FC<TeamProps> = (props: any) => {
                     <hr />
                   </IonText>
                   <p>
-                    {sortString(props.desc, 120)}{" "}
-                    <a onClick={() => setShowModal(true)}> readmore... </a>
+                    {sortString(props.desc, 200)}{" "}
+                    <a onClick={() => setShowModal(true)}> &nbsp; read more... </a>
                   </p>
                 </IonCardContent>
               </IonCol>
@@ -74,7 +81,7 @@ const TeamProfile: React.FC<TeamProps> = (props: any) => {
             <div className="ion-text-center">
               <IonImg
                 src={props.jersey}
-                style={{ padding: "10px", width: "40%" }}
+                style={{ padding: "10px", width: "36%" }}
               />
             </div>
           </IonText>
@@ -93,15 +100,18 @@ const TeamProfile: React.FC<TeamProps> = (props: any) => {
           <IonToolbar>
             <IonButtons slot="start" onClick={() => setShowModal(false)}>
               <IonButton fill="clear">
-                <IonIcon icon={arrowBack} /> Back
+                <IonIcon icon={arrowBack} /> &nbsp; Back
               </IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
-        <span className="text-modal" style={{
-              padding: '10px', lineHeight: '30px', color: '#5e6472', fontSize: '14px'
+        <IonContent
+    scrollEvents={true} >
+        <p className="text-modal" style={{
+              paddingLeft: '20px', paddingRight:'20px', lineHeight: '30px', color: '#5e6472', fontSize: '14px'
             }}>{props.desc}
-        </span>
+        </p>
+        </IonContent>
       </IonModal>
     </div>
   );
