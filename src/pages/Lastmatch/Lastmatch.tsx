@@ -18,7 +18,7 @@ import {
   IonGrid
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-import { fetchData, getLogos, convertDate } from "../../service/index";
+import { fetchData, getLogos, convertDate, getEmbedYt} from "../../service/index";
 import "./Lastmatch.css";
 import { arrowBack } from "ionicons/icons";
 
@@ -130,7 +130,11 @@ const CardMatch = (props: any) => {
             </IonText>
           </div>
           <IonGrid>
-          <iframe className="responsive-iframe" title={props.data.strTeam} width="560" height="315" src={`https://www.youtube.com/embed/` + props.data.strVideo.slice(32, 50)} allow="autoplay; encrypted-media"></iframe>
+            {
+              getEmbedYt(props.data.strVideo)
+              
+            }
+            <iframe className="responsive-iframe" title={props.data.strTeam} width="560" height="315" src={`https://www.youtube.com/embed/` + getEmbedYt(props.data.strVideo) } allow="autoplay; encrypted-media"></iframe>
           </IonGrid>
         </IonContent>
       </IonModal>

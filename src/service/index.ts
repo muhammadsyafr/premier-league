@@ -5,7 +5,7 @@ moment.locale("id");
 
 let manchesterUnited = `https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=Manchester%20United`;
 let lookupTeamPremierLeague = `https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4328`;
-let premierLeagueChart = `https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4328&s=2020-2021`;
+let premierLeagueChart = `https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4328&s=2021-2022`;
 
 export const fetchData = async (loadContent: any, team: any) => {
   let cases = "";
@@ -54,6 +54,11 @@ export const sortString = (text: any, length: number) => {
   }
   if (!text) return null;
   return text.substring(0, length);
+};
+
+export const getEmbedYt = (text: string) => {
+  if (!text) return null;
+  return text.substring(32, 99);
 };
 
 export const getLogos = async (team:any) => {

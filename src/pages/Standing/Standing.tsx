@@ -7,7 +7,7 @@ import {
 import "./Standing.css";
 import { fetchData } from "../../service/index";
 import { RefresherEventDetail } from '@ionic/core';
-import { BrowserView} from "react-device-detect";
+import { BrowserView, isBrowser, isMobile} from "react-device-detect";
 
 const Standing: React.FC = () => {
   // const { name } = useParams<{ name: string }>();
@@ -37,13 +37,28 @@ const Standing: React.FC = () => {
     });
   }, []);
 
+
+
   const Teams = (props:any) => {
     // console.log(props.data)
+    function ifMyTeam(team: string) {
+      if (!localStorage.getItem("team_name")) {
+        if (team === "Man United") {
+          return "myTeam"
+        }
+      } else {
+        if (team === localStorage.getItem("team_name")) {
+          return "myTeam"
+        }
+      }
+    }
     return(
       <tbody>
-        <tr className={props.data.strTeam === localStorage.getItem("team_name") ? "myTeam" : ""}>
+        <tr className={ifMyTeam(props.data.strTeam)}>
           <td className="text-center">{parseInt(props.numb) + 1}</td>
-          <BrowserView><td className="text-center"><img alt={props.data.strTeam} src={props.data.strTeamBadge} /></td></BrowserView>
+          {
+            isBrowser ? <td className="text-center"><img alt={props.data.strTeam} src={props.data.strTeamBadge} /></td> : ''
+          }
           <td>{props.data.strTeam}</td>
           <td>{props.data.intPlayed}</td>
           <td>{props.data.intGoalsFor}</td>
@@ -67,7 +82,9 @@ const Standing: React.FC = () => {
       <thead>
       <tr>
         <th></th>
-        <th>Badge</th>
+        {
+          isBrowser ? <th> Badge </th> : ''
+        }
         <th>Name</th>
         <th>M</th>
         <th>GF</th>
